@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ForexFactory.iml" filepath="$PROJECT_DIR$/.idea/ForexFactory.iml" />
-      <module fileurl="file://$PROJECT_DIR$/FxMEvents.iml" filepath="$PROJECT_DIR$/FxMEvents.iml" />
     </modules>
   </component>
 </project>
