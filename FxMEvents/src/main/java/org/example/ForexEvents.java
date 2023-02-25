@@ -59,46 +59,60 @@ public class ForexEvents {
         driver.manage().deleteAllCookies();
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-        /*Queue<String[]> q = new LinkedList<>();
+        Queue<String[]> q = new LinkedList<>();
+//        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jan", "31"});
+//        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=feb", "29"});
+//        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=mar", "31"});
+        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=apr", "30"});
+        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=may", "31"});
+        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jun", "30"});
+//        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jul", "31"});
+//        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=aug", "31"});
+//        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=sep", "30"});
+//        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=oct", "31"});
+//        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=nov", "30"});
+//        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=dec", "31"});
 
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=sep","30"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=oct","31"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=nov","30"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=dec","31"});*/
+/*        while (!q.isEmpty()){
+            String[] s = q.poll();
+            System.out.println(s[0]+1+".2008");
+        }*/
+        while (!(q.isEmpty())) {
+            String[] vals = q.poll();
+            for (int dayNumber = 1; dayNumber<= Integer.parseInt(vals[1]) ; dayNumber++) {
+                driver.manage().deleteAllCookies();
+                driver.get(vals[0] + dayNumber + ".2008");
+                WebElement date = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("tbody td[class='calendar__cell calendar__date date']>span>span")));
+                WebElement day = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("tbody td[class='calendar__cell calendar__date date']>span")));
+                List<WebElement> time = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("tbody td[class='calendar__cell calendar__time time']")));
+                List<WebElement> currency = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("tbody td[class='calendar__cell calendar__currency currency ']")));
+                List<WebElement> eventName = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("tbody span.calendar__event-title")));
+                List<WebElement> actualNumbers = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("tbody td[class='calendar__cell calendar__actual actual']")));
+                List<WebElement> forcastNumbers = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("tbody td[class='calendar__cell calendar__forecast forecast']")));
+                List<WebElement> preivousNumbers = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("tbody td[class='calendar__cell calendar__previous previous']")));
 
-        for (int dayNumber = 1; dayNumber <= 30; dayNumber++) {
-            driver.manage().deleteAllCookies();
-            driver.get("https://www.forexfactory.com/calendar?day=sep" + dayNumber + ".2007");
-            WebElement date = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("tbody td[class='calendar__cell calendar__date date']>span>span")));
-            WebElement day = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("tbody td[class='calendar__cell calendar__date date']>span")));
-            List<WebElement> time = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("tbody td[class='calendar__cell calendar__time time']")));
-            List<WebElement> currency = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("tbody td[class='calendar__cell calendar__currency currency ']")));
-            List<WebElement> eventName = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("tbody span.calendar__event-title")));
-            List<WebElement> actualNumbers = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("tbody td[class='calendar__cell calendar__actual actual']")));
-            List<WebElement> forcastNumbers = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("tbody td[class='calendar__cell calendar__forecast forecast']")));
-            List<WebElement> preivousNumbers = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("tbody td[class='calendar__cell calendar__previous previous']")));
-
-            List<ForexCalender> list = new ArrayList<>();
+                List<ForexCalender> list = new ArrayList<>();
 //            System.out.println("Sizes: " + time.size() + " " + currency.size() + " " + eventName.size() + " " + actualNumbers.size() + " " + forcastNumbers.size() + " " + preivousNumbers.size());
 
-            for (int i = 0; i < time.size(); i++) {
-                list.add(new ForexCalender(date.getText() + " " + 2007, time.get(i).getText(), currency.get(i).getText(),
-                        eventName.get(i).getText(), actualNumbers.get(i).getText(), forcastNumbers.get(i).getText(), preivousNumbers.get(i).getText()));
-            }
+                for (int i = 0; i < time.size(); i++) {
+                    list.add(new ForexCalender(date.getText() + " " + 2008, time.get(i).getText(), currency.get(i).getText(),
+                            eventName.get(i).getText(), actualNumbers.get(i).getText(), forcastNumbers.get(i).getText(), preivousNumbers.get(i).getText()));
+                }
 
             /*for(int i=0; i<time.size(); i++)
                 System.out.println(list.get(i));*/
-            System.out.println("Date: " + date.getText() + " | Size: " + list.size());
-            Thread.sleep(2000);
+                System.out.println("Date: " + date.getText() + " | Size: " + list.size());
+                Thread.sleep(100);
 
-            writeExcel(list);
-            list.clear();
-            System.out.println("Excel Writing Done");
-            System.out.println();
-            driver.manage().deleteAllCookies();
-            driver.switchTo().newWindow(WindowType.WINDOW);
+                writeExcel(list);
+                list.clear();
+                System.out.println("Excel Writing Done");
+                System.out.println();
+                driver.manage().deleteAllCookies();
+                driver.switchTo().newWindow(WindowType.WINDOW);
+            }
+//            driver.quit();
         }
-        driver.quit();
     }
 
     private static void writeExcel(List<ForexCalender> list) {
@@ -108,7 +122,7 @@ public class ForexEvents {
         }
         try {
             String fileName = "D:\\ForexFactory\\FxMEvents\\src\\FXM.xlsx";
-            String sheetName = "Sheet1";
+            String sheetName = "2008";
             FileInputStream inputStream = new FileInputStream(fileName);
             XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
             XSSFSheet sheet = workbook.getSheet(sheetName);
@@ -140,7 +154,7 @@ public class ForexEvents {
                 indx++;
             }
             System.out.println((indx) + " - Row written");
-            Thread.sleep(2000);
+            Thread.sleep(100);
 
             FileOutputStream outputStream = new FileOutputStream(fileName);
             workbook.write(outputStream);
