@@ -1,5 +1,11 @@
 package org.example;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -8,6 +14,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +34,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class ForexEvents {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         WebDriver driver;
         WebDriverWait wait;
@@ -43,7 +53,7 @@ public class ForexEvents {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(CapabilityType.PROXY, new Proxy().setHttpProxy("my-proxy-server:8080"));
         options.merge(capabilities);
-        driver.get("https://www.forexfactory.com/calendar?day=jan4.2007");
+        driver.get("https://www.forexfactory.com/calendar?day=jan2.2007");
 
         WebElement date = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("tbody td[class='calendar__cell calendar__date date']>span>span")));
         WebElement day = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("tbody td[class='calendar__cell calendar__date date']>span")));
@@ -58,13 +68,36 @@ public class ForexEvents {
         System.out.println("Sizes: "+ time.size()+" "+currency.size()+" "+eventName.size()+" "+actualNumbers.size()+" "+forcastNumbers.size()+" "+preivousNumbers.size());
 
         for(int i=0; i<time.size(); i++){
-            list.add(date.getText()+" "+time.get(i).getText()+" "+currency.get(i).getText()
-                    +" "+eventName.get(i).getText()+" "+actualNumbers.get(i).getText()
-                    +" "+forcastNumbers.get(i).getText()+" "+preivousNumbers.get(i).getText());
-        }
-        for (String s : list){
-            System.out.println(s);
+            list.add(new ForexCalender(date.getText()+" "+2007,time.get(i).getText(),currency.get(i).getText(),
+                    eventName.get(i).getText(),actualNumbers.get(i).getText(),forcastNumbers.get(i).getText(),preivousNumbers.get(i).getText()).toString());
         }
         driver.quit();
+
+        for(int i=0; i<time.size(); i++)
+            System.out.println(list.get(i));
+        System.out.println("Print Done");
+
+        writeExcel(list);
+        System.out.println("Excel Writing Done");
+    }
+
+    private static void writeExcel(List<String> list) {
+        try {
+            String fileName = "D:\\ForexFactory\\FxMEvents\\src\\FXM.xlsx";
+            String sheetName = "Sheet1";
+            FileInputStream inputStream = new FileInputStream(fileName);
+            XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+            XSSFSheet sheet = workbook.getSheet(sheetName);
+
+            for(int i=1; i<list.size(); i++){
+                Row row = sheet.createRow(i);
+                row.createCell(1).setCellValue(list.get(1));
+            }
+
+            FileOutputStream outputStream = new FileOutputStream(fileName);
+            workbook.write(outputStream);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
