@@ -62,8 +62,8 @@ public class ForexEvents {
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
         Queue<String[]> q = new LinkedList<>();
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jan", "31"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=feb", "29"});
+//        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jan", "31"});
+        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=feb", "28"});
         q.offer(new String[]{"https://www.forexfactory.com/calendar?day=mar", "31"});
         q.offer(new String[]{"https://www.forexfactory.com/calendar?day=apr", "30"});
         q.offer(new String[]{"https://www.forexfactory.com/calendar?day=may", "31"});
@@ -79,7 +79,7 @@ public class ForexEvents {
             String[] vals = q.poll();
             for (int dayNumber = 1; dayNumber<= Integer.parseInt(vals[1]) ; dayNumber++) {
                 driver.manage().deleteAllCookies();
-                driver.get(vals[0] + dayNumber + ".2012");
+                driver.get(vals[0] + dayNumber + ".2015");
                 WebElement date = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("tbody td[class='calendar__cell calendar__date date']>span>span")));
                 WebElement day = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("tbody td[class='calendar__cell calendar__date date']>span")));
                 List<WebElement> time = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("tbody td[class='calendar__cell calendar__time time']")));
@@ -93,7 +93,7 @@ public class ForexEvents {
 //            System.out.println("Sizes: " + time.size() + " " + currency.size() + " " + eventName.size() + " " + actualNumbers.size() + " " + forcastNumbers.size() + " " + preivousNumbers.size());
 
                 for (int i = 0; i < time.size(); i++) {
-                    list.add(new ForexCalender(date.getText() + " " + 2012, time.get(i).getText(), currency.get(i).getText(),
+                    list.add(new ForexCalender(date.getText() + " " + 2015, time.get(i).getText(), currency.get(i).getText(),
                             eventName.get(i).getText(), actualNumbers.get(i).getText(), forcastNumbers.get(i).getText(), preivousNumbers.get(i).getText()));
                 }
 
@@ -126,7 +126,7 @@ public class ForexEvents {
     private static void writeExcel(List<ForexCalender> list) {
         try {
             String fileName = "D:\\ForexFactory\\FxMEvents\\src\\FXM.xlsx";
-            String sheetName = "2012";
+            String sheetName = "2014";
             FileInputStream inputStream = new FileInputStream(fileName);
             XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
             XSSFSheet sheet = workbook.getSheet(sheetName);
