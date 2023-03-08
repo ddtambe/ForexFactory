@@ -62,73 +62,7 @@ public class ForexEvents {
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
         Queue<String[]> q = new LinkedList<>();
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jan", "31",".2018"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=feb", "28",".2018"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=mar", "31",".2018"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=apr", "30",".2018"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=may", "31",".2018"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jun", "30",".2018"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jul", "31",".2018"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=aug", "31",".2018"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=sep", "30",".2018"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=oct", "31",".2018"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=nov", "30",".2018"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=dec", "31",".2018"});
-
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jan", "31",".2019"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=feb", "28",".2019"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=mar", "31",".2019"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=apr", "30",".2019"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=may", "31",".2019"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jun", "30",".2019"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jul", "31",".2019"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=aug", "31",".2019"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=sep", "30",".2019"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=oct", "31",".2019"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=nov", "30",".2019"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=dec", "31",".2019"});
-
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jan", "31",".2020"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=feb", "29",".2020"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=mar", "31",".2020"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=apr", "30",".2020"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=may", "31",".2020"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jun", "30",".2020"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jul", "31",".2020"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=aug", "31",".2020"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=sep", "30",".2020"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=oct", "31",".2020"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=nov", "30",".2020"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=dec", "31",".2020"});
-
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jan", "31",".2021"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=feb", "28",".2021"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=mar", "31",".2021"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=apr", "30",".2021"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=may", "31",".2021"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jun", "30",".2021"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jul", "31",".2021"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=aug", "31",".2021"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=sep", "30",".2021"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=oct", "31",".2021"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=nov", "30",".2021"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=dec", "31",".2021"});
-
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jan", "31",".2022"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=feb", "28",".2022"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=mar", "31",".2022"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=apr", "30",".2022"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=may", "31",".2022"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jun", "30",".2022"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jul", "31",".2022"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=aug", "31",".2022"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=sep", "30",".2022"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=oct", "31",".2022"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=nov", "30",".2022"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=dec", "31",".2022"});
-
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=jan", "31",".2023"});
-        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=feb", "27",".2023"});
+        q.offer(new String[]{"https://www.forexfactory.com/calendar?day=mar", "31",".2023"});
 
         while (!(q.isEmpty())) {
             String[] vals = q.poll();
